@@ -1,5 +1,18 @@
 //Reading tab data and login with userid and password
-
+function setOfline(){
+chrome.storage.sync.set({'isonline' : '0'}, function(){
+    if(chrome.runtime.error){
+        console.log("Error.");
+    }
+});
+}
+function setOnline(){
+    chrome.storage.sync.set({'isonline' : '1'}, function(){
+        if(chrome.runtime.error){
+            console.log("Error.");
+        }
+    });
+}
 function session(){
     try{
         var s=document.getElementsByClassName('portal_link')[0].innerHTML;
@@ -21,6 +34,7 @@ function grunted(){
         var t=document.getElementById('nac_expiration_time');
         if(t!=null){
             console.log(t);
+            setOnline();
         }
         else{
             return false;
@@ -30,6 +44,8 @@ function grunted(){
         return false;
     }
 }
+
+
 function scripty(){
     var myVar = setTimeout(
         function () {
@@ -44,8 +60,22 @@ function scripty(){
           } 
         }, 2000);
 }
+chrome.storage.sync.set({'username' : 'utsho'}, function(){
+    if(chrome.runtime.error){
+        console.log("Error.");
+    }
+});
+chrome.storage.sync.get('username', function(items){
+    if(!chrome.runtime.error){
+        //do what you want to do with the data
+        var x = items.username;
+        console.log(x);
+    }
+});
 session();
+
 if(window.location.href =='https://192.168.1.220/PortalMain' && grunted()==false){
+    grunted();
     scripty();
 }
 

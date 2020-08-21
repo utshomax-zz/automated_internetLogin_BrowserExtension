@@ -1,0 +1,21 @@
+html{
+    min-width: 300px;
+    min-height: 348px;
+}
+
+.button{
+ border: 0;
+ background:cornflowerblue;
+ box-shadow: none;
+ border-radius: 0px;
+ 
+}
+.inputfrom{
+    text-align: center;
+}
+#logintext{
+    background-color: #1a75ff;
+}
+.online{
+    display: none;
+}

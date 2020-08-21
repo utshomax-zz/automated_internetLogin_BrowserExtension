@@ -1,3 +1,17 @@
+function setOnline(){
+    chrome.storage.sync.set({'isonline' : '1'}, function(){
+        if(chrome.runtime.error){
+            console.log("Error.");
+        }
+    });
+}
+function setOfline(){
+    chrome.storage.sync.set({'isonline' : '0'}, function(){
+        if(chrome.runtime.error){
+            console.log("Error.");
+        }
+    });
+}
 function checkNet(){
     var xhr = new XMLHttpRequest();
     xhr.open('HEAD', 'https://google.com', true);
@@ -6,9 +20,12 @@ function checkNet(){
 
     xhr.onload = function () {
     if(xhr.status>=200 && xhr.status<=308){
+        setOnline();
         chrome.tabs.create({url: "https://google.com", active: true });
+    
     }
     else{
+        setOfline();
         console.log('Something wrong');
     }
     };
@@ -32,4 +49,7 @@ function opentab(){
 }
 
 checkNet();
-
+// chrome.browserAction.onClicked.addListener(buttonClicked)
+// function buttonClicked(){
+//     checkNet();
+// }
