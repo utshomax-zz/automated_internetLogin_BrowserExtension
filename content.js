@@ -1,11 +1,5 @@
 //Reading tab data and login with userid and password
-function setOfline(){
-chrome.storage.sync.set({'isonline' : '0'}, function(){
-    if(chrome.runtime.error){
-        console.log("Error.");
-    }
-});
-}
+var id=[];
 function setOnline(){
     chrome.storage.sync.set({'isonline' : '1'}, function(){
         if(chrome.runtime.error){
@@ -44,7 +38,36 @@ function grunted(){
         return false;
     }
 }
+async function getID(){
+    await chrome.storage.sync.get('username', function(items){
+        if(!chrome.runtime.error){
+            if(items.username){
+                id[0]=items.username;
+            }
+        }
+    }); 
+    await chrome.storage.sync.get('password', function(items){
+        if(!chrome.runtime.error){
+            if(items.password){
+                id[1]=items.password;
+            }
+        }
+    }); 
+    return;  
+}
+function privacyError(){
+    try{
+        var btn = document.getElementById('details-button')
+        var link = document.getElementById('proceed-link')
+        if(btn && link){
+            btn.click();
+            link.click();
+        }
+    }
+    catch(e){
 
+    }    
+}
 
 function scripty(){
     var myVar = setTimeout(
@@ -52,31 +75,21 @@ function scripty(){
           var username = document.getElementById('LoginUserPassword_auth_username')
           var password = document.getElementById('LoginUserPassword_auth_password')
           var login= document.getElementById('UserCheck_Login_Button')
-    
           if (username && password) {
-            username.value = "119cs0145";
-            password.value = "...Dot99+++";
+            username.value = id[0];
+            password.value = id[1];
             login.click();
           } 
         }, 2000);
 }
-chrome.storage.sync.set({'username' : 'utsho'}, function(){
-    if(chrome.runtime.error){
-        console.log("Error.");
-    }
-});
-chrome.storage.sync.get('username', function(items){
-    if(!chrome.runtime.error){
-        //do what you want to do with the data
-        var x = items.username;
-        console.log(x);
-    }
-});
-session();
-
-if(window.location.href =='https://192.168.1.220/PortalMain' && grunted()==false){
-    grunted();
+async function main(){
+    await getID();
     scripty();
 }
-
-
+session();
+if(window.location.href =='https://192.168.1.220/PortalMain' && grunted()==false){
+    main();
+}
+else{
+    privacyError();
+}

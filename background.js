@@ -1,40 +1,26 @@
-function setOnline(){
-    chrome.storage.sync.set({'isonline' : '1'}, function(){
-        if(chrome.runtime.error){
-            console.log("Error.");
+var online=navigator.onLine;
+
+async function checkNet() {
+    return new Promise(function (resolve, reject) {
+        if(online){
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', 'https://google.com', true);
+            xhr.timeout = 2000; 
+            xhr.onload = function () {
+                
+                resolve('loaded');
+
+            };
+            xhr.ontimeout = function (e) {
+                opentab();
+                resolve('Timeout');
+            };
+            xhr.send();
         }
+        else{
+            resolve('offline');
+        }    
     });
-}
-function setOfline(){
-    chrome.storage.sync.set({'isonline' : '0'}, function(){
-        if(chrome.runtime.error){
-            console.log("Error.");
-        }
-    });
-}
-function checkNet(){
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', 'https://google.com', true);
-
-    xhr.timeout = 4000; 
-
-    xhr.onload = function () {
-    if(xhr.status>=200 && xhr.status<=308){
-        setOnline();
-        chrome.tabs.create({url: "https://google.com", active: true });
-    
-    }
-    else{
-        setOfline();
-        console.log('Something wrong');
-    }
-    };
-
-    xhr.ontimeout = function (e) {
-        opentab();
-    };
-
-    xhr.send(null);
 }
 
 function opentab(){
@@ -48,8 +34,12 @@ function opentab(){
     },INTERVAL);
 }
 
-checkNet();
-// chrome.browserAction.onClicked.addListener(buttonClicked)
-// function buttonClicked(){
-//     checkNet();
-// }
+async function main(){
+    await checkNet();
+}
+
+main();
+
+chrome.runtime.onInstalled.addListener(function (object) {
+    chrome.tabs.create({url: "https://github.com/utshomax/Automated_InternetLogin_chromeExtension"});
+});

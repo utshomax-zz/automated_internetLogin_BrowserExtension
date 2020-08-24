@@ -4,7 +4,14 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card" id='card'>
+    <div class="spinner" id="preload">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+    <div class="card" id='card' style="display: none;">
 
         <h5 class="card-header info-color white-text text-center py-4" id='logintext'>
             <strong style="color:white;">Login Info</strong>
@@ -16,37 +23,54 @@
             <div id="data" class="inputfrom" style="color: #757575;">
                 <br>
                 <p>
-                    <a href="">Instructions</a>
+                    <a href="" style="font-size: 18px;" id="inst">Instructions</a>
                 </p>
+                <br>
                 <input type="username" id="username" class="form-control" placeholder="username">
             <br>
-                <input type="password" id="password" class="form-control" placeholder="password">
-    
+                <input type="password" id="password" class="form-control" style="margin-bottom: 32px;" placeholder="password">
+  
+                <button id="submitbtn" class="btn btn-primary button" style="margin-bottom: 15px;" >Save login Info </button>
                 <br>
-                <button id="submitbtn" class="btn btn-primary button" >Save login Info </button>
-    
                 <div class="text-center">
-                   
-    
-                    <p>Contact</p>
+                    <p>CONTACT & REPORT</p>
                     <a type="button" class="btn-floating btn-fb btn-sm">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a type="button" class="btn-floating btn-tw btn-sm">
-                        <i class="fab fa-twitter"></i>
+                        <img src="facebook.png" alt="facebook" height="28px" width="28px">
                     </a>
                     <a type="button" class="btn-floating btn-li btn-sm">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a type="button" class="btn-floating btn-git btn-sm">
-                        <i class="fab fa-github"></i>
+                        <img src="github.png" alt="github" height="28px" width="28px">
                     </a>
                 </div>
             </div>
         </div>
+        <div class="card-header py-4" id='footertext'>
+            <p style="color:white;">Type your NITR Internet Login Username and Password & Save Your ID Info.Next Time You
+            Will Be Loged In Automatically.</p>
+        </div>
     </div>
-    <div class="online" id="online">
-            <p>Registered</p>
+    <div class="online" id="online" style="display: none;">
+           <br>
+            <h4>Welcome</h4>
+            <div id='on' style="display: none;">
+       
+                <div class="circle1 onoff"></div>
+                <br>
+                <p>You are Online!</p>
+                <br>
+            </div>
+            <div id="off">
+                <div class="circle onoff"></div>
+                <br>
+                <p>No Internet Connection</p>
+                
+                <button class="btn btn-primary button" id="connect">CONNECT</button>
+                <br>
+            </div>
+            <div class="tt">
+                <button class="btn btn-primary button" id='checkinternet'>CHECK INTERNET</button><br>
+                <button class="btn btn-primary button" id='remove'>REMOVE ID INFO</button>
+            </div>
+
     </div>
     
     <script src="./jquery/jquery-3.2.1.min.js"></script>
