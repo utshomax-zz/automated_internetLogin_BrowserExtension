@@ -7,8 +7,9 @@ async function checkNet() {
             xhr.open('HEAD', 'https://google.com', true);
             xhr.timeout = 2000; 
             xhr.onload = function () {
-                
-                resolve('loaded');
+                if(xhr.status>=200 && xhr.status<=308){
+                    resolve('loaded');
+                }
 
             };
             xhr.ontimeout = function (e) {
@@ -41,5 +42,5 @@ async function main(){
 main();
 
 chrome.runtime.onInstalled.addListener(function (object) {
-    chrome.tabs.create({url: "https://github.com/utshomax/Automated_InternetLogin_chromeExtension"});
+    chrome.tabs.create({url: "https://github.com/utshomax/Automated_InternetLogin_BrowserExtension"});
 });

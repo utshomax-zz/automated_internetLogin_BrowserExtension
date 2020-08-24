@@ -53,7 +53,7 @@ async function checkNet() {
             xhr.timeout = 2000; 
             xhr.onload = function () {
                 if(xhr.status>=200 && xhr.status<=308){
-                    setOnline();
+                    setOnline(); 
                     resolve(xhr.status);
                 }
                 else {
