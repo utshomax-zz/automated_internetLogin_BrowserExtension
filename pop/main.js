@@ -181,7 +181,7 @@ document.getElementById("remove").addEventListener("click", function(){
 });
 
 document.getElementById("connect").addEventListener("click", function(){
-    window.open('https://192.168.1.220/PortalMain', '_blank');
+    window.open('https://192.168.1.220/Reset', '_blank');
 });
 showStatus();
 

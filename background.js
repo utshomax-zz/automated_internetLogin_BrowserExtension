@@ -5,7 +5,7 @@ async function checkNet() {
         if(online){
             var xhr = new XMLHttpRequest();
             xhr.open('HEAD', 'https://google.com', true);
-            xhr.timeout = 2000; 
+            xhr.timeout = 1400; 
             xhr.onload = function () {
                 if(xhr.status>=200 && xhr.status<=308){
                     resolve('loaded');
@@ -27,7 +27,7 @@ async function checkNet() {
 function opentab(){
     const INTERVAL = 10000;
     setTimeout(function(){
-        chrome.tabs.create({url: "https://192.168.1.220/PortalMain", active: false }, tab =>{
+        chrome.tabs.create({url: "https://192.168.1.220/Reset", active: false }, tab =>{
             setTimeout(function(){
                 chrome.tabs.remove(tab.id);
             },INTERVAL);

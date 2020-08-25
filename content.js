@@ -7,20 +7,6 @@ function setOnline(){
         }
     });
 }
-function session(){
-    try{
-        var s=document.getElementsByClassName('portal_link')[0].innerHTML;
-        console.log(s);
-        if(s.trim()=='Regain access to the network'){
-            window.location.href='https://192.168.1.220/Reset';
-        }
-        
-    }
-    catch{
-        return false;
-    }
-
-}
 
 function grunted(){
     try{
@@ -72,6 +58,7 @@ function privacyError(){
 function scripty(){
     var myVar = setTimeout(
         function () {
+        
           var username = document.getElementById('LoginUserPassword_auth_username')
           var password = document.getElementById('LoginUserPassword_auth_password')
           var login= document.getElementById('UserCheck_Login_Button')
@@ -80,15 +67,22 @@ function scripty(){
             password.value = id[1];
             login.click();
           } 
+          else{
+            window.location.href='https://192.168.1.220/Reset';
+          }
+          
         }, 2000);
 }
 async function main(){
     await getID();
     scripty();
 }
-session();
-if(window.location.href =='https://192.168.1.220/PortalMain' && grunted()==false){
-    main();
+
+if(grunted()==false){
+    if(window.location.href =='https://192.168.1.220/PortalMain' || window.location.href =='https://192.168.1.220/Reset' ||window.location.href =='https://192.168.1.220/Login')
+    {
+        main();
+    }
 }
 else{
     privacyError();
